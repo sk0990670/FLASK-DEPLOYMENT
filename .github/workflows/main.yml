@@ -1,0 +1,25 @@
+name: Flask Deployment
+on:
+    push:
+        branches:[ main ]
+    jobs:
+        Deploy:
+            name: Deploy to EC2
+            runs-on: ubuntu-latest
+            steps:
+                - name: Deploy in EC2
+                  env:
+                    PRIVATE_KEY: ${{ secrete.SSH_KEY }}
+                    HOST_NAME: ${{ secrete.HOST_NAME }}
+                    USER_NAME: ${{ secrete.USER_NAME }}
+
+                   run: |
+                    echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+                    ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HostName} "
+                    ls &&
+                    cd Flask-Deployment/ &&
+                    ls &&
+                    git pull &&
+                    sudo systemctl stop flask-app &&
+                    sudo systemctl daemon-reload &&
+                    sudo systemctl start flask-app"
