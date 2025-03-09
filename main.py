@@ -34,4 +34,7 @@ def handle_message(message):
 
 if __name__ == '__main__':
     logger.info("Starting Flask server with WebSocket and restricted CORS (http://localhost:3000)")
-    socketio.run(app, debug=True)
+    #socketio.run(app, debug=True)
+    # this perferable to run in development stage not preferable to use in production stage.
+    #  debug =true :-whenerver you make any changes in this flask server it will automatically start your server.
+    # while we are deploying this fask with help of gunicorn in the ubuntu machine we will face the issue.
